@@ -1,9 +1,9 @@
 {
-  "name": "colm-workshop-2026",
+  "name": "manugenesis-colm-workshop-2026",
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "homepage": "https://ctrl-gaurav.github.io/af-colm-workshop-2026",
+  "homepage": "https://ctrl-gaurav.github.io/manugenesis-colm-workshop-2026",
   "scripts": {
     "dev": "vite",
     "start": "vite",

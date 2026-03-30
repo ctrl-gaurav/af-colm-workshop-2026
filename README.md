@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <a href="https://ctrl-gaurav.github.io/af-colm-workshop-2026"><img src="https://img.shields.io/badge/Workshop_Website-Live-667eea?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Workshop Website"/></a>
+  <a href="https://ctrl-gaurav.github.io/manugenesis-colm-workshop-2026"><img src="https://img.shields.io/badge/Workshop_Website-Live-667eea?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Workshop Website"/></a>
   <a href="https://colmweb.org/"><img src="https://img.shields.io/badge/COLM-2026-764ba2?style=for-the-badge" alt="COLM 2026"/></a>
 </p>
 
@@ -80,7 +80,7 @@ We invite submissions on topics including but not limited to:
 
 ## Contact
 
-For questions about the workshop, reach out at [manugenesis@googlegroups.com](mailto:manugenesis@googlegroups.com) or visit the [workshop website](https://ctrl-gaurav.github.io/af-colm-workshop-2026).
+For questions about the workshop, reach out at [manugenesis@googlegroups.com](mailto:manugenesis@googlegroups.com) or visit the [workshop website](https://ctrl-gaurav.github.io/manugenesis-colm-workshop-2026).
 
 ---
 
