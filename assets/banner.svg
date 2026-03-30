@@ -79,10 +79,10 @@
   <text x="600" y="80" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="15" font-weight="500" letter-spacing="6" fill="#667eea" opacity="0.9">COLM 2026 WORKSHOP</text>
 
   <!-- Main title -->
-  <text x="600" y="135" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="36" font-weight="700" fill="#ffffff">Autonomous Factory</text>
+  <text x="600" y="135" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="36" font-weight="700" fill="#ffffff">ManuGenesis</text>
 
   <!-- Subtitle -->
-  <text x="600" y="170" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="15" font-weight="400" fill="#a0a0b8" letter-spacing="0.5">Agentic AI for Design, Planning, Workflow Automation &amp; Manufacturing</text>
+  <text x="600" y="170" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="15" font-weight="400" fill="#a0a0b8" letter-spacing="0.5">Agentic AI for Autonomous Design, Manufacturing, and Supply Chain</text>
 
   <!-- Info pills -->
   <g transform="translate(600, 215)">

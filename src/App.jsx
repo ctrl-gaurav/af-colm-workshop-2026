@@ -2,11 +2,50 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import './index.css';
 import chiWangPhoto from './assets/images/chi-wang.jpg';
 import balajiPhoto from './assets/images/balaji-veeramani.jpg';
+import weiWangPhoto from './assets/images/wei_wang.jpg';
+import goldbergPhoto from './assets/images/goldberg.jpg';
+import qiangHuangPhoto from './assets/images/qiang_huang.png';
+import peterBelingPhoto from './assets/images/peter-beling.png';
+import jillesVreekenPhoto from './assets/images/jilles-vreeken.jpg';
+import jamesMoorePhoto from './assets/images/james-moore.jpg';
+import marthaGardnerPhoto from './assets/images/martha-gardner.png';
 
 /* ============================================
    Data
    ============================================ */
 const SPEAKERS = [
+  {
+    name: 'Wei Chen',
+    tentative: true,
+    role: 'Professor, Mechanical Engineering',
+    affiliation: 'Northwestern University',
+    photo: 'https://www.mccormick.northwestern.edu/images/research-and-faculty/directory/chen-wei.jpg',
+    website: 'https://www.mccormick.northwestern.edu/research-faculty/directory/profiles/chen-wei.html',
+  },
+  {
+    name: 'Lihui Wang',
+    tentative: true,
+    role: 'Professor, Production Engineering',
+    affiliation: 'KTH Royal Institute of Technology',
+    photo: 'https://www.kth.se/files/avatar/lihuiw',
+    website: 'https://www.kth.se/profile/lihuiw',
+  },
+  {
+    name: 'Ken Goldberg',
+    tentative: true,
+    role: 'Professor, IEOR & EECS',
+    affiliation: 'UC Berkeley',
+    photo: goldbergPhoto,
+    website: 'https://goldberg.berkeley.edu',
+  },
+  {
+    name: 'Wei Wang',
+    tentative: true,
+    role: 'Professor, Computer Science',
+    affiliation: 'UCLA',
+    photo: weiWangPhoto,
+    website: 'https://web.cs.ucla.edu/~weiwang/',
+  },
   {
     name: 'Dawn Song',
     tentative: true,
@@ -24,6 +63,18 @@ const SPEAKERS = [
     website: 'https://www.linkedin.com/in/chi-wang-autogen',
   },
   {
+    name: 'Albert Shih',
+    tentative: true,
+    role: 'Professor, Mechanical Engineering',
+    affiliation: 'University of Michigan',
+    photo: 'https://me.engin.umich.edu/wp-content/uploads/2019/08/shih-albert-photo.jpg',
+    website: 'https://me.engin.umich.edu/people/faculty/albert-shih/',
+    backup: true,
+  },
+];
+
+const PANELISTS = [
+  {
     name: 'Erica Briscoe',
     tentative: true,
     role: 'Program Manager',
@@ -32,12 +83,20 @@ const SPEAKERS = [
     website: 'https://usea.org/profile/dr-erica-briscoe',
   },
   {
-    name: 'Haider Warraich',
+    name: 'Martha M. Gardner',
     tentative: true,
-    role: 'Program Manager',
-    affiliation: 'ARPA-H',
-    photo: 'https://arpa-h.gov/sites/default/files/2026-02/Haider%20Warraich.png',
-    website: 'https://arpa-h.gov/about/people/haider-warraich',
+    role: 'Chief Scientist (Retired)',
+    affiliation: 'GE',
+    photo: marthaGardnerPhoto,
+    website: null,
+  },
+  {
+    name: 'James Moore',
+    tentative: true,
+    role: 'Fellow',
+    affiliation: 'MIET',
+    photo: jamesMoorePhoto,
+    website: 'https://www.linkedin.com/in/james-moore-miet-340076a7/',
   },
 ];
 
@@ -57,11 +116,11 @@ const ORGANIZERS = [
     website: 'https://xuanwang91.github.io',
   },
   {
-    name: 'Ran Jin',
-    role: 'Professor, Industrial Engineering',
-    affiliation: 'Virginia Tech',
-    photo: 'https://ise.vt.edu/content/ise_vt_edu/en/people/faculty/jin/_jcr_content/bio-image.img.jpg/1763479673462.jpg',
-    website: 'https://www.ise.vt.edu/people/faculty/jin.html',
+    name: 'Jilles Vreeken',
+    role: 'Tenured Faculty',
+    affiliation: 'CISPA Helmholtz Center',
+    photo: jillesVreekenPhoto,
+    website: 'https://cispa.de/en/people/jilles.vreeken',
   },
   {
     name: 'Balaji Veeramani',
@@ -71,45 +130,65 @@ const ORGANIZERS = [
     website: 'https://www.linkedin.com/in/balaji-veeramani-9a161b9/',
   },
   {
-    name: 'James Zou',
-    tentative: true,
-    role: 'Associate Professor, Computer Science',
-    affiliation: 'Stanford University',
-    photo: 'https://profiles.stanford.edu/proxy/api/cap/profiles/84123/resources/profilephoto/350x350.1509509766668.jpg',
-    website: 'https://www.james-zou.com',
+    name: 'Ran Jin',
+    role: 'Professor, Industrial Engineering',
+    affiliation: 'Virginia Tech',
+    photo: 'https://ise.vt.edu/content/ise_vt_edu/en/people/faculty/jin/_jcr_content/bio-image.img.jpg/1763479673462.jpg',
+    website: 'https://www.ise.vt.edu/people/faculty/jin.html',
+  },
+  {
+    name: 'Kimberly P. Ellis',
+    role: 'Professor, Industrial & Systems Engineering',
+    affiliation: 'Virginia Tech',
+    photo: 'https://ise.vt.edu/content/ise_vt_edu/en/people/faculty/ellis/_jcr_content/bio-image.img.jpg/1763479673462.jpg',
+    website: 'https://ise.vt.edu/people/faculty/ellis.html',
+  },
+  {
+    name: 'Peter Beling',
+    role: 'Professor, Data Science',
+    affiliation: 'University of Virginia',
+    photo: peterBelingPhoto,
+    website: 'https://datascience.virginia.edu/people/peter-beling',
+  },
+  {
+    name: 'Qiang Huang',
+    role: 'Professor, Industrial & Systems Engineering',
+    affiliation: 'University of Southern California',
+    photo: qiangHuangPhoto,
+    website: 'https://viterbi.usc.edu/directory/faculty/Huang/Qiang',
   },
 ];
 
 const TOPICS = [
   {
     icon: '\u{1F916}',
-    title: 'Agentic AI for Manufacturing',
-    desc: 'Autonomous agents for production planning, quality control, predictive maintenance, and real-time decision-making in manufacturing environments.',
+    title: 'LLM Agents for Design & Engineering',
+    desc: 'Language models and agents for design, engineering analysis, process planning, scheduling, and supply-chain reasoning.',
   },
   {
     icon: '\u{1F3ED}',
-    title: 'Autonomous Factory Design',
-    desc: 'AI-driven approaches to designing factory layouts, production lines, and supply chain configurations with minimal human intervention.',
+    title: 'Tool-Using & Multimodal Systems',
+    desc: 'Systems that work with physical simulators, digital twins, robotics, and industrial data platforms to solve real manufacturing problems.',
+  },
+  {
+    icon: '\u{1F6E1}\u{FE0F}',
+    title: 'Reliability, Safety & Oversight',
+    desc: 'Interpretability, safety, and human-AI collaboration in manufacturing settings where mistakes are costly.',
+  },
+  {
+    icon: '\u{1F4CA}',
+    title: 'Benchmarks & Evaluation',
+    desc: 'Datasets, evaluation protocols, and case studies built specifically for testing agentic AI in manufacturing contexts.',
   },
   {
     icon: '\u{1F504}',
-    title: 'Workflow Automation',
-    desc: 'LLM-based systems for automating complex multi-step workflows, process optimization, and intelligent task orchestration.',
-  },
-  {
-    icon: '\u{1F4CB}',
-    title: 'AI-Driven Planning & Scheduling',
-    desc: 'Advanced planning algorithms leveraging language models for resource allocation, scheduling, and logistics optimization.',
-  },
-  {
-    icon: '\u{1F50D}',
-    title: 'Quality & Anomaly Detection',
-    desc: 'Using agentic AI for real-time quality inspection, defect detection, root cause analysis, and process monitoring.',
+    title: 'Process Planning & Scheduling',
+    desc: 'AI-driven approaches for multi-step production planning, resource allocation, and supply chain coordination.',
   },
   {
     icon: '\u{1F517}',
-    title: 'Human-AI Collaboration',
-    desc: 'Interfaces and paradigms for effective human-AI teaming in industrial settings, including safety, trust, and interpretability.',
+    title: 'Supply Chain Intelligence',
+    desc: 'Agentic systems for supply chain decision-making, handling uncertainty, cost constraints, and downstream execution needs.',
   },
 ];
 
@@ -121,18 +200,16 @@ const DATES = [
 ];
 
 const SCHEDULE = [
-  { time: '8:30 AM - 8:45 AM', title: 'Opening Remarks', speaker: 'Workshop Organizers' },
-  { time: '8:45 AM - 9:30 AM', title: 'Keynote Talk 1', speaker: 'TBA' },
-  { time: '9:30 AM - 10:15 AM', title: 'Keynote Talk 2', speaker: 'TBA' },
-  { time: '10:15 AM - 10:45 AM', title: 'Coffee Break', isBreak: true },
-  { time: '10:45 AM - 11:30 AM', title: 'Keynote Talk 3', speaker: 'TBA' },
-  { time: '11:30 AM - 12:15 PM', title: 'Contributed Talks (Oral)', speaker: 'Selected Authors' },
-  { time: '12:15 PM - 1:30 PM', title: 'Lunch Break', isBreak: true },
-  { time: '1:30 PM - 2:15 PM', title: 'Keynote Talk 4', speaker: 'TBA' },
-  { time: '2:15 PM - 3:30 PM', title: 'Poster Session', speaker: 'All Accepted Authors' },
-  { time: '3:30 PM - 4:00 PM', title: 'Coffee Break', isBreak: true },
-  { time: '4:00 PM - 5:00 PM', title: 'Panel Discussion', speaker: 'Invited Panelists' },
-  { time: '5:00 PM - 5:15 PM', title: 'Closing Remarks & Best Paper Award', speaker: 'Workshop Organizers' },
+  { time: '8:00 AM - 8:10 AM', title: 'Opening Remarks & Workshop Overview', speaker: 'Workshop Organizers' },
+  { time: '8:10 AM - 9:50 AM', title: 'Keynote 1 + Keynote 2', speaker: '50 min each including Q&A' },
+  { time: '9:50 AM - 10:10 AM', title: 'Coffee Break', isBreak: true },
+  { time: '10:10 AM - 11:50 AM', title: 'Keynote 3 + Keynote 4', speaker: '50 min each including Q&A' },
+  { time: '11:50 AM - 1:10 PM', title: 'Poster Session, Networking & Community Meetup', speaker: 'All Accepted Authors' },
+  { time: '1:10 PM - 2:00 PM', title: 'Panel: Agentic AI for Real Manufacturing', speaker: 'Invited Panelists' },
+  { time: '2:00 PM - 3:40 PM', title: 'Keynote 5 + Keynote 6', speaker: '50 min each including Q&A' },
+  { time: '3:40 PM - 4:00 PM', title: 'Coffee Break & Social Event', isBreak: true },
+  { time: '4:00 PM - 4:45 PM', title: 'Contributed Spotlight Talks', speaker: '8-10 min each including Q&A' },
+  { time: '4:45 PM - 5:00 PM', title: 'Closing Discussion, Highlights & Next Steps', speaker: 'Workshop Organizers' },
 ];
 
 const NAV_ITEMS = [
@@ -163,6 +240,7 @@ function PersonCard({ person }) {
       </div>
       <div className="person-name">{person.name}</div>
       {person.tentative && <div className="person-tentative">(tentative)</div>}
+      {person.backup && <div className="person-tentative">(backup)</div>}
       <div className="person-role">{person.role}</div>
       <div className="person-affiliation">{person.affiliation}</div>
       {person.website && (
@@ -257,7 +335,7 @@ function App() {
       <nav className="navbar">
         <div className="navbar-inner">
           <a href="#top" className="navbar-brand">
-            <span>AF</span> @ COLM 2026
+            <span>ManuGenesis</span> @ COLM 2026
           </a>
 
           <ul className={`nav-links ${mobileMenuOpen ? 'open' : ''}`}>
@@ -296,9 +374,9 @@ function App() {
             <span className="hero-badge-dot"></span>
             COLM 2026 Workshop
           </div>
-          <h1>Autonomous Factory</h1>
+          <h1>ManuGenesis</h1>
           <p className="hero-subtitle">
-            Agentic AI for Design, Planning, Workflow Automation, and Manufacturing
+            Agentic AI for Autonomous Design, Manufacturing, and Supply Chain
           </p>
           <div className="hero-meta">
             <div className="hero-meta-item">
@@ -333,7 +411,7 @@ function App() {
               <div className="section-label">About</div>
               <h2 className="section-title">Workshop Overview</h2>
               <p className="section-description">
-                Bringing together researchers and practitioners at the intersection of agentic AI and industrial automation.
+                Where agentic AI meets real-world design, manufacturing, and supply chain workflows.
               </p>
             </div>
           </FadeIn>
@@ -342,52 +420,56 @@ function App() {
             <div className="about-content">
               <div className="about-text">
                 <p>
-                  The <strong>Autonomous Factory</strong> workshop explores the transformative potential of
-                  agentic AI systems in revolutionizing design, planning, workflow automation, and
-                  manufacturing processes. As large language models and autonomous agents become
-                  increasingly capable, they offer unprecedented opportunities to create intelligent
-                  systems that can autonomously manage complex industrial workflows.
+                  Large language models can now reason over goals, plan multi-step actions, use external tools,
+                  and work with humans in the loop. This matters a lot for design, manufacturing, and supply chains,
+                  where decisions are tightly connected: design choices depend on engineering constraints,
+                  manufacturing plans depend on what tools and processes are available, and supply chain decisions
+                  have to deal with uncertainty, cost, and what happens downstream.
                 </p>
                 <p>
-                  This workshop aims to build a community around the emerging intersection of agentic AI
-                  and industrial automation, bringing together researchers from NLP, AI planning, robotics,
-                  manufacturing, and industrial engineering. We welcome both foundational research and
-                  applied work that pushes the boundaries of what autonomous AI systems can achieve in
-                  real-world factory and production environments.
+                  These workflows are multi-stage, information-heavy, and cut across technical documents, simulation
+                  tools, enterprise software, robotics, and human know-how. They need AI systems that can coordinate
+                  across steps, pull together different kinds of information, and support decisions under real
+                  constraints.
                 </p>
                 <p>
-                  We particularly encourage submissions from junior researchers and members of
-                  underrepresented groups, and will feature dedicated sessions for works in progress
-                  and early-stage research.
+                  <strong>ManuGenesis</strong> brings together researchers and practitioners who are interested in
+                  grounding language-model-based agents in high-impact industrial workflows. At the same time, we
+                  want to use these workflows to push forward research on planning, tool use, multimodal reasoning,
+                  human-AI collaboration, and working with digital twins and simulators.
+                </p>
+                <p>
+                  We welcome students, early-career researchers, and members of underrepresented groups,
+                  and will have dedicated space for work-in-progress and spotlight presentations.
                 </p>
               </div>
               <div className="about-highlights">
                 <div className="highlight-card">
                   <span className="highlight-icon">{'\u{1F3AF}'}</span>
                   <div>
-                    <h4>Focused Scope</h4>
-                    <p>Dedicated to the intersection of agentic AI and manufacturing, a rapidly growing field.</p>
+                    <h4>Grounded in Real Workflows</h4>
+                    <p>Focused on actual design, manufacturing, and supply chain problems, not just benchmarks.</p>
                   </div>
                 </div>
                 <div className="highlight-card">
                   <span className="highlight-icon">{'\u{1F91D}'}</span>
                   <div>
-                    <h4>Interdisciplinary</h4>
-                    <p>Bridging NLP, AI planning, robotics, and industrial engineering communities.</p>
+                    <h4>Cross-Disciplinary</h4>
+                    <p>Connecting language models, planning, robotics, optimization, and manufacturing research.</p>
                   </div>
                 </div>
                 <div className="highlight-card">
                   <span className="highlight-icon">{'\u{1F4AC}'}</span>
                   <div>
-                    <h4>Interactive Format</h4>
-                    <p>Keynotes, contributed talks, poster sessions, and panel discussions.</p>
+                    <h4>Full-Day Program</h4>
+                    <p>Keynotes, panel discussion, poster sessions, spotlight talks, and networking.</p>
                   </div>
                 </div>
                 <div className="highlight-card">
                   <span className="highlight-icon">{'\u{1F331}'}</span>
                   <div>
-                    <h4>Junior Researcher Friendly</h4>
-                    <p>Dedicated support for early-career researchers and work-in-progress presentations.</p>
+                    <h4>Open to All Career Stages</h4>
+                    <p>Flexible formats for early-stage work, with support for students and junior researchers.</p>
                   </div>
                 </div>
               </div>
@@ -404,7 +486,7 @@ function App() {
               <div className="section-label">Call for Papers</div>
               <h2 className="section-title">Topics of Interest</h2>
               <p className="section-description">
-                We invite submissions on a broad range of topics at the intersection of agentic AI and manufacturing. Topics include but are not limited to:
+                We invite submissions across a wide range of topics connecting agentic AI with design, manufacturing, and supply chains. Topics include but are not limited to:
               </p>
             </div>
           </FadeIn>
@@ -431,14 +513,32 @@ function App() {
               <div className="section-label">Keynote Speakers</div>
               <h2 className="section-title">Invited Speakers</h2>
               <p className="section-description">
-                Leading researchers and practitioners sharing insights on the future of agentic AI in manufacturing.
+                Researchers and practitioners from academia, industry, and government working at the frontier of agentic AI and manufacturing.
               </p>
             </div>
           </FadeIn>
 
           <FadeIn>
             <div className="people-grid">
-              {SPEAKERS.map((person, i) => (
+              {SPEAKERS.filter(s => !s.backup).map((person, i) => (
+                <PersonCard key={i} person={person} />
+              ))}
+            </div>
+          </FadeIn>
+
+          <FadeIn>
+            <div className="section-header" style={{ marginTop: '60px', marginBottom: '30px' }}>
+              <div className="section-label">Panelists</div>
+              <h2 className="section-title" style={{ fontSize: '1.6rem' }}>Panel Discussion</h2>
+              <p className="section-description">
+                Agentic AI for real manufacturing settings: perspectives from government, industry, and engineering.
+              </p>
+            </div>
+          </FadeIn>
+
+          <FadeIn>
+            <div className="people-grid">
+              {PANELISTS.map((person, i) => (
                 <PersonCard key={i} person={person} />
               ))}
             </div>
@@ -490,18 +590,18 @@ function App() {
             <div className="submission-card">
               <h3>Submit Your Work</h3>
               <p>
-                We welcome original research papers, position papers, and work-in-progress submissions
-                on topics related to agentic AI for manufacturing and automation.
+                We accept extended abstracts (2-4 pages), short research papers, system/demo papers,
+                and position papers. All submissions are non-archival.
               </p>
 
               <div className="submission-details">
                 <div className="submission-detail">
                   <h4>Format</h4>
-                  <p>COLM 2026 format, 4-8 pages (excluding references)</p>
+                  <p>2-4 pages extended abstract or short paper (excluding references)</p>
                 </div>
                 <div className="submission-detail">
                   <h4>Review Process</h4>
-                  <p>Double-blind peer review</p>
+                  <p>At least two reviews per submission via OpenReview</p>
                 </div>
                 <div className="submission-detail">
                   <h4>Submission Platform</h4>
@@ -510,8 +610,9 @@ function App() {
               </div>
 
               <p>
-                Accepted papers will be presented as oral talks or posters.
-                At least one author of each accepted paper must register for the workshop.
+                We welcome both mature projects and early-stage work. Each submission will be
+                reviewed for relevance, clarity, technical or practical contribution, and potential
+                to start discussion. Accepted papers will be presented as posters or spotlight talks.
               </p>
 
               {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
@@ -539,7 +640,7 @@ function App() {
               <div className="section-label">Program</div>
               <h2 className="section-title">Tentative Schedule</h2>
               <p className="section-description">
-                October 9, 2026 &mdash; Hilton Union Square, San Francisco
+                October 9, 2026 | Hilton Union Square, San Francisco
               </p>
             </div>
           </FadeIn>
@@ -586,20 +687,20 @@ function App() {
       <footer className="footer">
         <div className="footer-content">
           <div className="footer-brand">
-            <span>Autonomous Factory</span> Workshop
+            <span>ManuGenesis</span> Workshop
           </div>
           <p className="footer-text">
-            Co-located with COLM 2026 &mdash; October 9, 2026 &mdash; San Francisco, USA
+            Co-located with COLM 2026 | October 9, 2026 | San Francisco, USA
           </p>
           <div className="footer-links">
             <a href="https://colmweb.org" target="_blank" rel="noopener noreferrer">COLM 2026</a>
             <a href="https://colmweb.org/cfw.html" target="_blank" rel="noopener noreferrer">Call for Workshops</a>
             <a href="#submission">Submit a Paper</a>
-            <a href="mailto:colm-workshops@googlegroups.com">Contact</a>
+            <a href="mailto:manugenesis@googlegroups.com">Contact</a>
           </div>
           <div className="footer-divider"></div>
           <p className="footer-copyright">
-            &copy; 2026 Autonomous Factory Workshop. All participants must follow the{' '}
+            &copy; 2026 ManuGenesis Workshop. All participants must follow the{' '}
             <a href="https://colmweb.org" target="_blank" rel="noopener noreferrer">
               COLM Code of Conduct
             </a>.
